@@ -1,0 +1,24 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "deployments": [
+    {
+      "name": "discord-bot",
+      "services": [
+        {
+          "name": "bot",
+          "source": ".",
+          "build": {
+            "builder": "NIXPACKS"
+          },
+          "start": "python3 bot.py"
+        }
+      ],
+      "variables": {
+        "DISCORD_TOKEN": "MTQzODc4ODc5NTYzNzA0MzI2MQ.GtHzvA.k0xckutiOPEJCGDQorQ8xKNrgK1OEn1kxUjF7w"
+      }
+    }
+  ],
+  "project": {
+    "name": "python-discord-bot"
+  }
+}
