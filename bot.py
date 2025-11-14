@@ -1,6 +1,20 @@
+from flask import Flask
+import threading
 import os
-import discord
 from discord.ext import commands
+import discord
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Bot is running!"
+
+def run():
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+
+# اجرا کردن Flask در Thread جداگانه
+threading.Thread(target=run).start()+
 
 # فعال کردن Intents کامل برای دریافت پیام‌ها
 intents = discord.Intents.default()
@@ -27,3 +41,4 @@ if not TOKEN:
     raise ValueError("توکن ربات در Environment Variable پیدا نشد!")
 
 bot.run(TOKEN)
+
