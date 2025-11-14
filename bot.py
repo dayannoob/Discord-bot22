@@ -2,9 +2,10 @@ import os
 import discord
 from discord.ext import commands
 
-# فعال کردن Intents
+# فعال کردن Intents کامل برای دریافت پیام‌ها
 intents = discord.Intents.default()
 intents.message_content = True
+intents.messages = True  # اضافه کردن این خط برای اطمینان
 
 # ساخت ربات با prefix "!"
 bot = commands.Bot(command_prefix="!", intents=intents)
@@ -13,7 +14,6 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 @bot.event
 async def on_ready():
     print(f"{bot.user} is online!")
-    # وضعیت ربات را آنلاین و با Activity مشخص می‌کنیم
     await bot.change_presence(activity=discord.Game(name="!ping"))
 
 # دستور ساده ping
@@ -23,4 +23,7 @@ async def ping(ctx):
 
 # اجرای ربات با توکن از Environment Variable
 TOKEN = os.getenv("DISCORD_TOKEN")
+if not TOKEN:
+    raise ValueError("توکن ربات در Environment Variable پیدا نشد!")
+
 bot.run(TOKEN)
